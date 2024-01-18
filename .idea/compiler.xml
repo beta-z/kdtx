@@ -6,13 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="kdtx-common" />
         <module name="kdtx-server" />
+        <module name="kdtx-pojo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="kdtx-common" options="-parameters" />
+      <module name="kdtx-pojo" options="-parameters" />
       <module name="kdtx-server" options="-parameters" />
     </option>
   </component>
