@@ -27,4 +27,8 @@ logging:
       sky:
         mapper: debug
         service: info
+<<<<<<< HEAD
         controller: info
+=======
+        controller: info
+>>>>>>> origin/main
