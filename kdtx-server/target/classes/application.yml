@@ -8,16 +8,27 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/kdtx?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: 1234
+    password: root
 kdtx:
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
     access-key-id: LTAI5tSpa2mxLrHPf4oS4PBm
     access-key-secret: lUTlgPBRhorhJ5ZnwSPEhhYL5QOQlY
     bucket-name: lkd-upload
+    url: jdbc:mysql://localhost:3306/huike?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+  redis:
+    host: localhost
+    port: 6379
+#    password: 123456
+    database: 1
+
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+
+
 
 logging:
   level:
