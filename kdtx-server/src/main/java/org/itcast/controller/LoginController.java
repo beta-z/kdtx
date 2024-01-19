@@ -1,14 +1,12 @@
 package org.itcast.controller;
 
+import org.itcast.context.BaseContext;
 import org.itcast.dto.LoginDTO;
 import org.itcast.entity.Code;
-import org.itcast.entity.User;
-import org.itcast.result.Result;
+import org.itcast.vo.LoginVO;
 import org.itcast.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping()
@@ -16,7 +14,7 @@ public class LoginController {
     @Autowired
     LoginService loginService;
     @PostMapping("/login")
-    public Result login(@RequestBody LoginDTO dto){
+    public LoginVO login(@RequestBody LoginDTO dto){
         return loginService.login(dto);
     }
     @GetMapping("/captchaImage")
@@ -25,6 +23,8 @@ public class LoginController {
     }
     @GetMapping("getInfo")
     public String getInfo(){
+        Long id = BaseContext.getCurrentId();
+
         return "{\n" +
                 "    \"msg\": \"操作成功\",\n" +
                 "    \"code\": 200,\n" +

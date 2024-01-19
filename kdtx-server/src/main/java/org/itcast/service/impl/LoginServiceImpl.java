@@ -1,7 +1,6 @@
 package org.itcast.service.impl;
 
 import cn.hutool.captcha.CaptchaUtil;
-import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.captcha.generator.MathGenerator;
 import org.itcast.dto.LoginDTO;
@@ -10,7 +9,7 @@ import org.itcast.entity.User;
 import org.itcast.exception.BaseException;
 import org.itcast.exception.ParamIllegalException;
 import org.itcast.mapper.UserMapper;
-import org.itcast.result.Result;
+import org.itcast.vo.LoginVO;
 import org.itcast.service.LoginService;
 import org.itcast.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -29,7 +27,7 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     StringRedisTemplate redisTemplate;
     @Override
-    public Result login(LoginDTO dto) {
+    public LoginVO login(LoginDTO dto) {
         if(dto == null){
             //参数异常
             throw new ParamIllegalException("登录参数为空");
@@ -53,7 +51,7 @@ public class LoginServiceImpl implements LoginService {
         HashMap<String, Object> claims = new HashMap<>();
         claims.put("user_id",user.getUserId());
 
-        return Result.success(JwtUtil.createJWT("itcast",7200000,claims));
+        return new LoginVO(200,"",JwtUtil.createJWT("itcast",7200000,claims));
     }
 
     @Override

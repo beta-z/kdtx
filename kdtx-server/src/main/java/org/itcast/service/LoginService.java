@@ -3,13 +3,11 @@ package org.itcast.service;
 
 import org.itcast.dto.LoginDTO;
 import org.itcast.entity.Code;
-import org.itcast.result.Result;
-
-import java.util.Map;
+import org.itcast.vo.LoginVO;
 
 public interface LoginService {
 
-    Result login(LoginDTO dto);
+    LoginVO login(LoginDTO dto);
 
     Code getCode();
 }
