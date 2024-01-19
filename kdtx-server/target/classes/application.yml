@@ -1,0 +1,28 @@
+server:
+  port: 8080
+spring:
+  application:
+    #应用名称 , 可选
+    name: kdtx
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/kdtx?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+kdtx:
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tSpa2mxLrHPf4oS4PBm
+    access-key-secret: lUTlgPBRhorhJ5ZnwSPEhhYL5QOQlY
+    bucket-name: lkd-upload
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      sky:
+        mapper: debug
+        service: info
+        controller: info

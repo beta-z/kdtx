@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.itcast.mapper.ActivityMapper">
+    <update id="update">
+
+    </update>
+
+
+    <select id="pageQuery" resultType="org.itcast.entity.Activity">
+        select * from category
+        <where>
+            <if test="id != null and id !=''">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="channel != null and channel != ''">
+                and channel = #{channel}
+            </if>
+            <if test="info != null and info != ''">
+                and info = #{info}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="discount != null and discount != ''">
+                and discount = #{discount}
+            </if>
+            <if test="vouchers != null and vouchers != ''">
+                and vouchers = #{vouchers}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="begin_time != null and begin_time != ''">
+                and begin_time = #{beginTime}
+            </if>
+            <if test="end_time != null and end_time != ''">
+                and end_time = #{endTime}
+            </if>
+            <if test="creat_time != null and creat_time != ''">
+                and creat_time = #{creatTime}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+        </where>
+    </select>
+</mapper>
