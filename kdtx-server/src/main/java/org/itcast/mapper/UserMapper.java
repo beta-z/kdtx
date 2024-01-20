@@ -5,7 +5,10 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
-import org.itcast.dto.UserPageDTO;
+import org.itcast.dto.LoginDTO;
+import org.itcast.dto.user.UserPageDTO;
+import org.itcast.entity.Post;
+import org.itcast.entity.Role;
 import org.itcast.entity.User;
 import org.itcast.vo.UserListSelectVO;
 
@@ -27,9 +30,9 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     void addUser(User user);
 
-    void addUserRole(Long userId, List<Long> roleIds);
+    void addUserRole(Long userId, List<Role> roleIds);
 
-    void addUserPost(Long userId, List<Long> postIds);
+    void addUserPost(Long userId, List<Post> postIds);
 
     void updateUser(User user);
 

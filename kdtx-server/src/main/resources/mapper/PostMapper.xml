@@ -5,4 +5,10 @@
 
 
 
+    <delete id="deleteIDS">
+        delete from sys_post where post_id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

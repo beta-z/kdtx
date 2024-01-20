@@ -1,8 +1,10 @@
-package org.itcast.dto;
+package org.itcast.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.itcast.entity.Post;
+import org.itcast.entity.Role;
 
 import java.util.List;
 
@@ -30,9 +32,9 @@ public class UserDTO {
     //状态
     private String status;
     //岗位
-    private List<Long> postIds;
+    private List<Post> postIds;
     //角色
-    private List<Long> roleIds;
+    private List<Role> roleIds;
     //备注
     private String remark;
 }

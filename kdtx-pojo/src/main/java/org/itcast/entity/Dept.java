@@ -1,5 +1,6 @@
 package org.itcast.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,8 @@ public class Dept {
     //创建人
     private String createBy;
     //创建时间
-    private String createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
     //部门id
     private Long deptId;
     //父部门id

@@ -1,16 +1,22 @@
 package org.itcast.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role {
 
+    //创建人
+    private String createBy;
     //创建时间
-    private String createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
     //角色id
     private Integer roleId;
     //角色名称
@@ -30,7 +36,7 @@ public class Role {
     //删除标志
     private String delFlag; //0存在，2删除
     //标志
-    private Boolean flag;
+    private Boolean flag = false;
     //是否是超级管理员
     private Boolean admin = true;
 

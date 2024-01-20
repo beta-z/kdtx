@@ -15,8 +15,15 @@ import java.util.List;
 @NoArgsConstructor
 public class PageResult implements Serializable {
 
+    private Integer code; //编码：1成功，0和其它数字为失败
+    private String msg; //错误信息
+
     private long total; //总记录数
 
     private List rows; //当前页数据集合
+
+    public static PageResult success(Long total,List rows) {
+        return new PageResult(200,"查询成功",total,rows);
+    }
 
 }

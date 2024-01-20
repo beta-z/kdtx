@@ -5,9 +5,7 @@ import com.github.pagehelper.PageHelper;
 import org.itcast.common.NewResult;
 import org.itcast.common.PageResult;
 import org.itcast.common.Result;
-import org.itcast.dto.UserDTO;
-import org.itcast.dto.UserPageDTO;
-import org.itcast.dto.UserUpdatePasswordDTO;
+import org.itcast.dto.user.*;
 import org.itcast.entity.Post;
 import org.itcast.entity.Role;
 import org.itcast.entity.User;
@@ -22,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -44,7 +41,8 @@ public class UserServiceImpl implements UserService {
         }
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
         Page<User> page = userMapper.list(dto);
-        return new PageResult(page.getTotal(),page.getResult());
+
+        return PageResult.success(page.getTotal(),page.getResult());
     }
 
     @Override
@@ -66,7 +64,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.getUserId(userId);
         List<Long> postIds = postMapper.getPostIds(userId);
         List<Post> posts = postMapper.list();
-        List<Role> roles = roleMapper.list();
+        List<Role> roles = roleMapper.list(null);
         List<Long> roleIds = roleMapper.getRoleIds(userId);
         return NewResult.success(user,roleIds,postIds,roles,posts);
 
@@ -83,8 +81,8 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         BeanUtils.copyProperties(dto,user);
         //todo 需要获取当前登录用户，暂时使用假数据
-        user.setCreateBy("admin");
-        user.setCreateTime(LocalDateTime.now());
+//        user.setCreateBy("admin");
+ //       user.setCreateTime(LocalDateTime.now());
         userMapper.addUser(user);
         Long userId = user.getUserId();
         userMapper.addUserRole(userId,dto.getRoleIds());
@@ -103,8 +101,8 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         BeanUtils.copyProperties(dto,user);
         //todo 需要获取当前用户，暂时使用假数据
-        user.setUpdateBy("admin");
-        user.setUpdateTime(LocalDateTime.now());
+//        user.setUpdateBy("admin");
+ //       user.setUpdateTime(LocalDateTime.now());
         userMapper.updateUser(user);
         userMapper.delectUserRoles(dto.getUserId());
         if (dto.getRoleIds() != null){
@@ -131,7 +129,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result updatePwd(UserUpdatePasswordDTO dto) {
+    public Result updatePwd(UserUpdatePwdDTO dto) {
         if (dto == null){
             throw new ParamsIllegalException("修改用户密码时参数异常");
         }
@@ -139,5 +137,45 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(dto,user);
         userMapper.updateUser(user);
         return Result.success();
+    }
+
+    @Override
+    public Result updateStatus(UserUpdateStatusDTO dto) {
+        if (dto == null){
+            throw new ParamsIllegalException("修改用户状态时参数异常");
+        }
+        User user = new User();
+        BeanUtils.copyProperties(dto,user);
+        userMapper.updateUser(user);
+        return Result.success();
+
+    }
+
+    @Override
+    public Result prUpdatePwd(PrUserUpdatePwdDTO dto) {
+        if (dto == null){
+            throw new ParamsIllegalException("修改密码（个人）时参数异常");
+        }
+        //todo 获取当前用户id
+        Long userId = null;
+        User user = userMapper.getUserId(userId);
+
+        if (user.getPassword() != dto.getOldPassword()){
+            throw new ParamsIllegalException("旧密码数据错误，请重试");
+        }
+        user.setPassword(dto.getNewPassword());
+        userMapper.updateUser(user);
+        return Result.success();
+    }
+
+    @Override
+    public Result selectProfile() {
+
+        //todo 当前用户id
+        Long userId = null;
+
+        User user = userMapper.getUserId(userId);
+        //fixme
+        return Result.success(user);
     }
 }

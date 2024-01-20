@@ -68,7 +68,7 @@
                update_time,
                remark from sys_user
         where user_type ="00" <where>
-<if test="userName != null and userName != ''">user_name = #{userName} and </if>
+<if test="userName != null and userName != ''">user_name like concat("%",#{userName},"%") and </if>
 <if test="phonenumber != null and phonenumber != ''">phonenumber = #{phonenumber} and</if>
 <if test="status != null and status != ''">status = #{status} and</if>
 <if test="deptId != null">dept_id = #{deptId} and</if>
