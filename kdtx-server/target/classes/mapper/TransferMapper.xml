@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itcast.mapper.TransferMapper">
+
+    <!--
+     insert into dish_flavor(dish_id,name,value) values (),(),(),...
+     collection:变量集合的名称，一般和方法的参数名一致
+     item:  for(DishFlavor df : flavors){}
+     open: 循环开始前拼接的片段
+     close:循环接收后拼接的片段
+ -->
+    <select id="getTransferlist" resultType="VO.TransferlistVO">
+        select * from sys_user
+        <where>
+            <if test="userId!= null">
+                user_id= #{userId}
+            </if>
+            <if test="userName!= null">
+                and user_name = #{userName}
+            </if>
+            <if test="beginTime!= null">
+                and begin_time  = #{beginTime}
+            </if>
+            <if test="endTime != null">
+                and end_time = #{endTime}
+            </if>
+            <if test="phonenumber != null">
+                and phonenumber = #{phonenumber}
+            </if>
+        </where>
+    </select>
+</mapper>
