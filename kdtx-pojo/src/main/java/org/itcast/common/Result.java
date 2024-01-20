@@ -30,6 +30,8 @@ public class Result<T> implements Serializable {
         return result;
     }
 
+
+
     public static <T> Result<T> error(String msg) {
         Result result = new Result();
         result.msg = msg;

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.itcast.mapper.UserMapper">
+
+
+    <select id="list" resultType="org.itcast.entity.User">
+        select user_id,
+               dept_id,
+               user_name,
+               nick_name,
+               user_type,
+               email,
+               phonenumber,
+               sex,
+               avatar,
+               password,
+               status,
+               del_flag,
+               login_ip,
+               login_date,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark from sys_user
+        where user_type ="00" <where>
+<if test="userName != null and userName != ''">user_name = #{userName} and </if>
+<if test="phonenumber != null and phonenumber != ''">phonenumber = #{phonenumber} and</if>
+<if test="status != null and status != ''">status = #{status} and</if>
+<if test="deptId != null">dept_id = #{deptId} and</if>
+<if test="begin != null and end !=null">create_time between #{begin} and #{end}</if>
+        </where>
+order by create_time desc
+
+    </select>
+</mapper>
