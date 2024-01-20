@@ -27,7 +27,7 @@ public class PostController {
 
 
     /**
-     * 菜品删除
+     * 批量删除
      * @param ids
      * @return
      */
