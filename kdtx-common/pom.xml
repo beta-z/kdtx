@@ -11,7 +11,12 @@
 
     <artifactId>kdtx-common</artifactId>
 
-
+<dependencies>
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt</artifactId>
+    </dependency>
+</dependencies>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
