@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.itcast.mapper.RoleMapper">
+
+
+    <select id="list" resultType="org.itcast.entity.Role">
+        select role_id,
+               role_name,
+               role_key,
+               role_sort,
+               data_scope,
+               menu_check_strictly,
+               dept_check_strictly,
+               status, del_flag,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark from sys_role
+<where>
+    <if test="roleName != null and roleName != '' ">role_name like concat("%",#{roleName},"%") and </if>
+    <if test="roleKey != null and roleKey != ''">role_key = #{roleKey} and</if>
+    <if test="status != null and status != ''">status = #{status} and</if>
+    <if test="begin != null and end != null">create_time between #{begin} and #{end}</if>
+</where>
+order by create_time desc
+
+    </select>
+    <select id="getRole" resultType="org.itcast.entity.Role">
+        select role_id,
+               role_name,
+               role_key,
+               role_sort,
+               data_scope,
+               menu_check_strictly,
+               dept_check_strictly,
+               status, del_flag,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark from sys_role where role_id = #{roleId}
+
+    </select>
+</mapper>
