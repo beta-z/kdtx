@@ -9,8 +9,6 @@ spring:
     url: jdbc:mysql://localhost:3306/huike?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 1234
-
-
 mybatis:
   #mapper配置文件
   mapper-locations: classpath:mapper/*.xml,classpath:mapper/dict/*.xml
@@ -24,8 +22,6 @@ redis:
   port: 6379
 #  password: 123456
   database: 1
-
-
 logging:
   level:
     com:
