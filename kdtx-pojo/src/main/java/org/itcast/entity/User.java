@@ -15,15 +15,15 @@ import java.util.List;
 public class User {
 
     //
-    private List<Long> roleIds = new ArrayList<>();
+    private List<Long> roleIds;
     //
-    private List<Long> postIds = new ArrayList<>();
+    private List<Long> postIds;
 
     //更新人
-//    private String updateBy;
+    private String updateBy;
     //更新时间
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-//    private LocalDateTime updateTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
     //创建人
     private String createBy;
     //创建时间
@@ -61,7 +61,7 @@ public class User {
     //部门
     private Dept dept;
     //角色
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles;
     //是否是超级管理员
     private final Boolean admin = true;
 }

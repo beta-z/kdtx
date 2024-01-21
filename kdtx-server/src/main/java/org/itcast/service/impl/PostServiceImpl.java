@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import org.itcast.common.PostResult;
 import org.itcast.common.Result;
 import org.itcast.dto.post.PostDTO;
+import org.itcast.dto.post.PostListDTO;
 import org.itcast.entity.Post;
 import org.itcast.mapper.PostMapper;
 import org.itcast.service.PostService;
@@ -21,9 +22,9 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostMapper postMapper;
     @Override
-    public PostResult postList(PostDTO dto) {
+    public PostResult postList(PostListDTO dto) {
         PageHelper.startPage(dto.getPageNum(),dto.getPageSize());
-        List<Post> list=postMapper.list();
+        List<Post> list=postMapper.listhaha(dto);
 
         Page<Post> page= (Page<Post>) list;
         PostResult postResult = new PostResult();
@@ -68,5 +69,11 @@ public class PostServiceImpl implements PostService {
         Post postVO=postMapper.getPost(id);
 
         return Result.success(postVO) ;
+    }
+
+    @Override
+    public Result updatePost(Post dto) {
+        postMapper.update(dto);
+        return Result.success();
     }
 }

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.itcast.common.PostResult;
 import org.itcast.common.Result;
 import org.itcast.dto.post.PostDTO;
+import org.itcast.dto.post.PostListDTO;
 import org.itcast.entity.Post;
 import org.itcast.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class PostController {
     @Autowired
     private PostService postService;
     @GetMapping("/list")
-    public PostResult postList(PostDTO dto){
+    public PostResult postList(PostListDTO dto){
         return postService.postList(dto);
     }
 
@@ -51,6 +52,15 @@ public class PostController {
     @GetMapping("/{id}")
     public Result getPost(@PathVariable Integer id){
         return postService.getPost(id);
+    }
+
+    /**
+     * 修改数据
+     */
+    @PutMapping
+    public Result updatePost(@RequestBody Post dto){
+        return postService.updatePost(dto);
+
     }
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.itcast.mapper.transferMapper.TransferMapper">
+    <select id="getTransferlist" resultType="org.itcast.vo.TransferlistVO" >
+        select * from sys_user
+        <where>
+            <if test="userId != null and userId != ''">
+                user_id= #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="beginTime != null and beginTime != '' and test= endTime != null and endTime != ''">
+                and create_time  between #{beginTime} and #{endTime}
+            </if>
+            <if test="phonenumber != null and phonenumber != ''">
+                and phonenumber = #{phonenumber}
+            </if>
+        </where>
+    </select>
+</mapper>

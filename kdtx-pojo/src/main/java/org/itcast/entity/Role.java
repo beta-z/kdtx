@@ -12,13 +12,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Role {
 
+    //更新人
+    private String updateBy;
+    //更新时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
     //创建人
     private String createBy;
     //创建时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
     //角色id
-    private Integer roleId;
+    private Long roleId;
     //角色名称
     private String roleName;
     //角色权限字符串
@@ -39,6 +44,8 @@ public class Role {
     private Boolean flag = false;
     //是否是超级管理员
     private Boolean admin = true;
+    //备注
+    private String remark;
 
 
 

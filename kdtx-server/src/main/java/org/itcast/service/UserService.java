@@ -1,9 +1,11 @@
 package org.itcast.service;
 
+import org.itcast.common.AddResult;
 import org.itcast.common.NewResult;
 import org.itcast.common.PageResult;
 import org.itcast.common.Result;
 import org.itcast.dto.user.*;
+import org.itcast.entity.User;
 
 public interface UserService {
 
@@ -85,4 +87,10 @@ public interface UserService {
      */
     Result selectProfile();
 
+    /**
+     * 新增用户所需
+     *
+     * @return
+     */
+    AddResult add();
 }
