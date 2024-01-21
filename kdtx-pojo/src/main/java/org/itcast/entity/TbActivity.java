@@ -6,8 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.convert.DurationFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Builder
@@ -31,8 +35,15 @@ public class TbActivity implements Serializable {
 
     private Integer vouchers;
 
-    private Long beginTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    private LocalDateTime beginTime;
 
-    private Long endTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    private LocalDateTime endTime;
+
+    private Integer code;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    private LocalDateTime createTime;
 
 }

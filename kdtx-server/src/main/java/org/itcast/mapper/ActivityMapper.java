@@ -16,7 +16,7 @@ import java.util.Date;
 @Mapper
 public interface ActivityMapper extends BaseMapper<TbActivity> {
 
-    void insertActivity(TbActivity activity);
+    void insertActivity(ActivtyAddDto activity);
 
     Page<ActivityVo> selectListActivityList(String code, String channel, Date beginCreateTime, Date endCreateTime, Date beginTime, Date endTime);
 

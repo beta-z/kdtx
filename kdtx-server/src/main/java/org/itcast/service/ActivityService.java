@@ -7,6 +7,7 @@ import org.itcast.dto.ActivityDto;
 import org.itcast.dto.ActivtyAddDto;
 import org.itcast.dto.PageQueryDTO;
 import com.sky.result.PageResult;
+import org.itcast.entity.TbActivity;
 
 public interface ActivityService {
 

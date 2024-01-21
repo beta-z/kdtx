@@ -37,9 +37,8 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public Object insertActivity(ActivtyAddDto dto) {
-        TbActivity activity = new TbActivity();
-        BeanUtils.copyProperties(dto, activity);
-        activityMapper.insertActivity(activity);
+        dto.setCode(ActivtyAddDto.generationCode());
+        activityMapper.insertActivity(dto);
         return Result.success();
     }
 

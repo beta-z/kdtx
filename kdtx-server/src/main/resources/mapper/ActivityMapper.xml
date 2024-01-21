@@ -5,7 +5,7 @@
 
     <insert id="insertActivity">
         insert into tb_activity(name, code, channel, info, type, discount, vouchers, begin_time, end_time, create_time)values
-        (#{name},#{code},#{channel},#{info},#{type},#{discount},#{vouchers},#{beginTime},#{endTime},#{createTime})
+        (#{name},#{code},#{channel},#{info},#{type},#{discount},#{vouchers},#{beginTime},#{endTime},now())
     </insert>
 
 

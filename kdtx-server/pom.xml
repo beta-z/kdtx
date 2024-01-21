@@ -30,6 +30,12 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.3.1</version>
         </dependency>
+        <!--生成随机编号-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>5.3.8</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
