@@ -30,9 +30,9 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     void addUser(User user);
 
-    void addUserRole(Long userId, List<Long> roleIds);
+    void addUserRole(Long userId, List<Role> roleIds);
 
-    void addUserPost(Long userId, List<Long> postIds);
+    void addUserPost(Long userId, List<Post> postIds);
 
     void updateUser(User user);
 
@@ -47,6 +47,8 @@ public interface UserMapper {
 
     @Select("select user_id from sys_user where user_name = #{username} and password =#{password}")
     User login(LoginDTO dto);
+    @Select("select user_name from sys_user where user_id = #{id}")
+    String getNameById(Long id);
 
     @Select("select user_id, dept_id, user_name, nick_name, user_type, email, phonenumber, sex, avatar, password, status, del_flag, login_ip, login_date, create_by, create_time, update_by, update_time, remark from sys_user where dept_id = #{deptId}")
     List<User> getUser(Long deptId);

@@ -2,7 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.itcast.mapper.PostMapper">
+    <update id="update" parameterType="org.itcast.entity.Post">
+        UPDATE sys_post
+        <set>
+            <if test="postName != null">post_name = #{postName},</if>
+            <if test="postCode != null">post_code = #{postCode},</if>
+            <if test="postSort != null">post_sort = #{postSort},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </set>
+        WHERE post_id = #{postId}
+    </update>
 
 
+    <delete id="deleteIDS">
+        delete from sys_post where post_id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 
+    <select id="listhaha" resultType="org.itcast.entity.Post">
+        SELECT post_id, post_code, post_name, post_sort, status, create_by, create_time, update_by, update_time, remark
+        FROM sys_post
+        <where>
+            <if test="postCode != null and postCode != ''">
+                AND post_code LIKE CONCAT('%', #{postCode}, '%')
+            </if>
+            <if test="postName != null and postName != ''">
+                AND post_name LIKE CONCAT('%', #{postName}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
 </mapper>
