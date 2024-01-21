@@ -1,10 +1,15 @@
 package org.itcast.exception;
 
-public class BaseException extends RuntimeException{
+/**
+ * 业务异常
+ */
+public class BaseException extends RuntimeException {
+
     public BaseException() {
     }
 
-    public BaseException(String message) {
-        super(message);
+    public BaseException(String msg) {
+        super(msg);
     }
+
 }

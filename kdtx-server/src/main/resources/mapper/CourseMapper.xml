@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.itcast.mapper.courseMapper.CourseMapper">
+
+
+    <select id="getCourselist" resultType="org.itcast.vo.CourselistVO">
+        select * from tb_course
+        <where>
+            <if test="code!= null and code != '' ">
+                code= #{code}
+            </if>
+            <if test="name!= null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="beginTime!= null and beginTime != ''and  test= endTime != null and endTime != ''">
+                and create_time  between #{beginTime} and #{endTime}
+            </if>
+            <if test="applicablePerson != null and applicablePerson != ''">
+                and applicablePerson = #{applicablePerson}
+            </if>
+            <if test="subject != null and subject != ''">
+                and subject = #{subject}
+            </if>
+        </where>
+    </select>
+</mapper>
