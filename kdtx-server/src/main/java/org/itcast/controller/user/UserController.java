@@ -1,10 +1,12 @@
 package org.itcast.controller.user;
 
 import lombok.extern.slf4j.Slf4j;
+import org.itcast.common.AddResult;
 import org.itcast.common.NewResult;
 import org.itcast.common.PageResult;
 import org.itcast.common.Result;
 import org.itcast.dto.user.*;
+import org.itcast.entity.User;
 import org.itcast.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -280,6 +282,14 @@ public class UserController {
         userService.updateUser(dto);
         return Result.success();
     }
+
+    @GetMapping
+    public AddResult add(){
+        log.info("新增用户所需");
+      return userService.add();
+    }
+
+
 
 
 

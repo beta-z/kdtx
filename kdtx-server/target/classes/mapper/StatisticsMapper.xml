@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.itcast.mapper.StatisticsMapper">
+
+
+
+    <resultMap type="org.itcast.vo.ClueReportVo" id="clueReport">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="owner"    column="owner"    />
+        <result property="phone"    column="phone"    />
+        <result property="channel"    column="channel"    />
+        <result property="code"    column="code"    />
+        <result property="info"    column="info"    />
+        <result property="clueStatus"    column="clue_status"    />
+        <result property="clueCreateTime"    column="clue_create_time"    />
+        <result property="businessCreateTime"    column="business_create_time"    />
+        <result property="businessStatus"    column="business_status"    />
+        <result property="contractCreateTime"    column="contract_create_time"    />
+        <result property="order"    column="contract_order"    />
+    </resultMap>
+
+
+
+    <select id="clueStatisticsList" parameterType="org.itcast.dto.ClueStatisticsDTO" resultMap="clueReport">
+        select clue.id, clue.name, clue.phone, clue.channel, clue.activity_id, activity.code as code, activity.name as info,clue.status as clue_status, clue.create_time as clue_create_time,
+        r.user_name as owner,b.create_time as business_create_time,b.`status` as business_status,c.create_time contract_create_time,c.contract_order from tb_clue clue
+        left join  tb_activity activity on activity.id = clue.activity_id
+        left join tb_business b on clue.id=b.clue_id
+        left join tb_contract c on b.id=c.business_id
+        left join tb_assign_record r on clue.id=r.assign_id
+        and r.latest = '1' and r.type='0'
+        <where>
+            <if test="id != null  and id != ''"> and clue.id = #{id}</if>
+            <if test="name != null  and name != ''"> and clue.name like concat('%', #{name}, '%')</if>
+            <if test="phone != null  and phone != ''"> and clue.phone = #{phone}</if>
+            <if test="channel != null  and channel != ''"> and clue.channel = #{channel}</if>
+            <if test="activityId != null  and activityId != ''"> and clue.activity_id = #{activityId}</if>
+            <if test="sex != null  and sex != ''"> and clue.sex = #{sex}</if>
+            <if test="age != null "> and clue.age = #{age}</if>
+            <if test="weixin != null  and weixin != ''"> and clue.weixin = #{weixin}</if>
+            <if test="qq != null  and qq != ''"> and clue.qq = #{qq}</if>
+            <if test="level != null  and level != ''"> and clue.level = #{level}</if>
+            <if test="subject != null  and subject != ''"> and clue.subject = #{subject}</if>
+            <!--            <if test="params.beginCreateTime != null and params.beginCreateTime != ''">&lt;!&ndash; 开始创建时间 &ndash;&gt;-->
+            <!--                and date_format(clue.create_time,'%y%m%d') &gt;= date_format(#{params.beginCreateTime},'%y%m%d')-->
+            <!--            </if>-->
+            <!--            <if test="params.endCreateTime != null and params.endCreateTime != ''">&lt;!&ndash;  &ndash;&gt;-->
+            <!--                and date_format(clue.create_time,'%y%m%d') &lt;= date_format(#{params.endCreateTime},'%y%m%d')-->
+            <!--            </if>-->
+
+
+            <if test="nextTime != null "> and clue.next_time = #{nextTime}</if>
+            <if test="owner != null  and owner != ''"> and r.user_name like concat('%', #{owner}, '%')</if>
+        </where>
+
+        order by clue.create_time desc
+    </select>
+
+    <!--    ===========================================================-->
+    <resultMap type="org.itcast.dto.ActivityDTO" id="TbActivityResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="channel"    column="channel"    />
+        <result property="info"    column="info"    />
+        <result property="type"    column="type"    />
+        <result property="discount"    column="discount"    />
+        <result property="vouchers"    column="vouchers"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="beginTime"    column="begin_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="code"    column="code"    />
+    </resultMap>
+
+    <sql id="selectTbActivityVo">
+        select id, name, channel, info, type, discount, vouchers, status, begin_time, end_time,code,create_time from tb_activity
+    </sql>
+    <select id="activityStatisticsList" parameterType="org.itcast.dto.ActivityDTO" resultMap="TbActivityResult">
+        <include refid="selectTbActivityVo"/>
+        <where>
+            <if test="channel != null  and channel != ''"> and channel = #{channel}</if>
+            <if test="code != null  and code != ''"> and code like concat('%', #{code}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="info != null  and info != ''"> and info = #{info}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="discount != null "> and discount = #{discount}</if>
+            <if test="vouchers != null "> and vouchers = #{vouchers}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <!--            <if test="params.beginCreateTime != null and params.beginCreateTime != ''">&lt;!&ndash; 开始创建时间 &ndash;&gt;-->
+            <!--                and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginCreateTime},'%y%m%d')-->
+            <!--            </if>-->
+            <!--            <if test="params.endCreateTime != null and params.endCreateTime != ''">&lt;!&ndash;  &ndash;&gt;-->
+            <!--                and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endCreateTime},'%y%m%d')-->
+            <!--            </if>-->
+            <!--            <if test="params.beginTime != null and params.beginTime != ''">&lt;!&ndash; 活动开始时间 &ndash;&gt;-->
+            <!--                and date_format(begin_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')-->
+            <!--            </if>-->
+            <!--            <if test="params.endTime != null and params.endTime != ''">&lt;!&ndash; 活动结束时间 &ndash;&gt;-->
+            <!--                and date_format(end_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')-->
+            <!--            </if>-->
+        </where>
+        ORDER BY `create_time` DESC
+    </select>
+
+
+
+    <!--    ============================-->
+    <resultMap type="org.itcast.dto.StatisticsDTO" id="TbContractResult">
+        <result property="id"    column="id"    />
+        <result property="contractNo"    column="contract_no"    />
+        <result property="phone"    column="phone"    />
+        <result property="name"    column="name"    />
+        <result property="subject"    column="subject"    />
+        <result property="channel"    column="channel"    />
+        <result property="courseId"    column="course_id"    />
+        <result property="activityId"    column="activity_id"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="order"    column="contract_order"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="discountType"    column="discount_type"    />
+        <result property="coursePrice"    column="course_price"    />
+        <result property="businessId"    column="business_id"    />
+    </resultMap>
+
+    <sql id="selectTbContractVo">
+        select id, contract_no, phone, name, subject, channel, course_id, activity_id, status, create_by, dept_id,create_time, contract_order, file_name, discount_type, course_price,business_id,dept_id from tb_contract
+    </sql>
+    <select id="leadStstistic" parameterType="org.itcast.dto.StatisticsDTO" resultMap="TbContractResult">
+        <include refid="selectTbContractVo"/>
+        <where>
+            <if test="contractNo != null  and contractNo != ''"> and contract_no like concat('%', #{contractNo}, '%')</if>
+            <if test="channel != null and channel != ''">channel = #{channel}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="subject != null and subject != ''"> and subject = #{subject}</if>
+            <if test="courseId != null and courseId != ''"> and course_id = #{courseId}</if>
+            <if test="activityId != null and activityId != ''"> and activity_id = #{activityId}</if>
+            <if test="deptId != null and deptId != ''"> and dept_id = #{deptId}</if>
+            <if test="createBy != null and createBy != ''"> and create_by = #{createBy}</if>
+            <!--            <if test="params.createTime != null and params.createTime != ''">&lt;!&ndash; 开始创建时间 &ndash;&gt;-->
+            <!--                and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.createTime},'%y%m%d')-->
+            <!--            </if>-->
+            <!--            <if test="params.endCreateTime != null and params.endCreateTime != ''">&lt;!&ndash;  &ndash;&gt;-->
+            <!--                and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endCreateTime},'%y%m%d')-->
+            <!--            </if>-->
+        </where>
+        ORDER BY `create_time` DESC
+    </select>
+
+    <!--    ==============================-->
+    <select id="deptStatisticsList"
+            resultType="java.util.Map">
+        select dept_id, count(id) as num, round(SUM(contract_order),2) as total_amount from tb_contract
+        <where>
+            <if test="beginCreateTime != null and beginCreateTime != ''"><!-- 开始创建时间 -->
+                and date_format(create_time,'%y-%m-%d') &gt;= date_format(#{beginCreateTime},'%y-%m-%d')
+            </if>
+            <if test="endCreateTime != null and endCreateTime != ''"><!--  -->
+                and date_format(create_time,'%y-%m-%d') &lt;= date_format(#{endCreateTime},'%y-%m-%d')
+            </if>
+        </where>
+        group by dept_id
+        order by total_amount desc
+    </select>
+
+    <!--    ====================================-->
+    <select id="deptStatistics"
+            resultType="java.util.Map">
+        select dept_id, count(id) as num, round(SUM(contract_order),2) as total_amount from tb_contract
+        <where>
+            <if test="beginCreateTime != null and beginCreateTime != ''"><!-- 开始创建时间 -->
+                and date_format(create_time,'%y-%m-%d') &gt;= date_format(#{beginCreateTime},'%y-%m-%d')
+            </if>
+            <if test="endCreateTime != null and endCreateTime != ''"><!--  -->
+                and date_format(create_time,'%y-%m-%d') &lt;= date_format(#{endCreateTime},'%y-%m-%d')
+            </if>
+        </where>
+        group by dept_id
+        order by total_amount desc
+    </select>
+
+
+
+</mapper>

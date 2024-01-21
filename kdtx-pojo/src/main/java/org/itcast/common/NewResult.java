@@ -8,7 +8,6 @@ import org.itcast.entity.Role;
 import org.itcast.entity.User;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -27,7 +26,8 @@ public class NewResult implements Serializable {
                                  List<Long> postIds,
                                  List<Role> roles,
                                  List<Post> posts){
-        return new NewResult(200,"操作成功",user,roleIds,postIds,
+
+        return new NewResult(1,null,user,roleIds,postIds,
                 roles,posts);
 
     }
@@ -36,4 +36,5 @@ public class NewResult implements Serializable {
         return new NewResult(200,null,null,null,null,roles,posts);
 
     }
+
 }

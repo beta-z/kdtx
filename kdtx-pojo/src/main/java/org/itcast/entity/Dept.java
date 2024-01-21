@@ -13,6 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Dept {
 
+    //更新人
+    private String updateBy;
+    //更新时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
     //创建人
     private String createBy;
     //创建时间
@@ -21,7 +26,7 @@ public class Dept {
     //部门id
     private Long deptId;
     //父部门id
-    private Integer parentId;
+    private Long parentId;
     //祖级列表
     private String ancestors;
     //部门名称

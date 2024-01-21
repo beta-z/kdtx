@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-
+@AllArgsConstructor
 @NoArgsConstructor
 public class Post {
+
     private Integer postId;
     private String postCode;
     private String postName;
@@ -23,4 +24,6 @@ public class Post {
     private LocalDateTime updateTime;
     private String updateBy;
     private String remark;
+
+
 }

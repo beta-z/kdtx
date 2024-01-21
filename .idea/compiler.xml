@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="kdtx-common" />
+        <module name="untitled" />
         <module name="kdtx-server" />
         <module name="kdtx-pojo" />
+        <module name="kdtx-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
@@ -19,6 +20,7 @@
       <module name="kdtx-common" options="-parameters" />
       <module name="kdtx-pojo" options="-parameters" />
       <module name="kdtx-server" options="-parameters" />
+      <module name="untitled" options="-parameters" />
     </option>
   </component>
 </project>
