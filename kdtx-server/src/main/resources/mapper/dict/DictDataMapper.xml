@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.itcast.mapper.DictDataMapper">
+
+    <update id="update">
+        update sys_dict_data
+        <set>
+            <if test="dictCode != null">dict_code = #{dictCode},</if>
+            <if test="dictSort != null">dict_sort = #{dictSort},</if>
+            <if test="dictLabel != null and dictLabel != ''">dict_label = #{dictLabel},</if>
+            <if test="dictValue != null and dictValue != ''">dict_value = #{dictValue},</if>
+            <if test="dictType != null and dictType != ''">dict_type = #{dictType},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark}</if>
+        </set>
+        where dict_code = #{dictCode}
+    </update>
+</mapper>

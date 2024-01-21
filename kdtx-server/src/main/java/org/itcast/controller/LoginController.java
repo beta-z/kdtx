@@ -21,7 +21,7 @@ public class LoginController {
     public Code getCode(){
        return loginService.getCode();
     }
-    @GetMapping("getInfo")
+    @GetMapping("/getInfo")
     public String getInfo(){
         Long id = BaseContext.getCurrentId();
 
@@ -36,7 +36,7 @@ public class LoginController {
                 "    ],\n" +
                 "    \"user\": {\n" +
                 "        \"createBy\": \"admin\",\n" +
-//                "        \"createTime\": \"2021-03-31 03:12:10\",\n" +
+                "        \"createTime\": \"2021-03-31 03:12:10\",\n" +
                 "        \"userId\": 1,\n" +
                 "        \"deptId\": 103,\n" +
                 "        \"userName\": \"demo\",\n" +
@@ -85,7 +85,7 @@ public class LoginController {
      * @return 路由信息
      */
 
-    @GetMapping("getRouters")
+    @GetMapping("/getRouters")
     public String getRouters() {
         return "{\n" +
                 "    \"msg\": \"操作成功\",\n" +
@@ -405,7 +405,7 @@ public class LoginController {
                 "                {\n" +
                 "                    \"name\": \"Log\",\n" +
                 "                    \"path\": \"log\",\n" +
-                "                    \"hidden\": false,\n" +
+                "                    \"hidden\": true,\n" +
                 "                    \"redirect\": \"noRedirect\",\n" +
                 "                    \"component\": \"ParentView\",\n" +
                 "                    \"alwaysShow\": true,\n" +
@@ -442,7 +442,7 @@ public class LoginController {
                 "                {\n" +
                 "                    \"name\": \"SystemLog\",\n" +
                 "                    \"path\": \"systemLog\",\n" +
-                "                    \"hidden\": false,\n" +
+                "                    \"hidden\": true,\n" +
                 "                    \"component\": \"system/systemLog/index\",\n" +
                 "                    \"meta\": {\n" +
                 "                        \"title\": \"系统日志\",\n" +
