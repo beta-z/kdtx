@@ -2,30 +2,26 @@ package org.itcast.mapper;
 
 
 
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.Page;
-import org.apache.ibatis.annotations.Delete;
-import org.itcast.dto.ActivityDTO;
-import org.itcast.dto.PageQueryDTO;
-import org.itcast.entity.Activity;
-import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.itcast.dto.ActivtyAddDto;
+import org.itcast.entity.TbActivity;
 import org.apache.ibatis.annotations.Mapper;
+import org.itcast.vo.ActivityVo;
+
+import java.util.Date;
 
 @Mapper
-public interface ActivityMapper {
+public interface ActivityMapper extends BaseMapper<TbActivity> {
 
+    void insertActivity(TbActivity activity);
 
-    @Delete("delete from tb_activity where id=#{id}")
-    void deleteById(Long id);
+    Page<ActivityVo> selectListActivityList(String code, String channel, Date beginCreateTime, Date endCreateTime, Date beginTime, Date endTime);
 
-    //新增活动
-    @Insert("insert into tb_activity(id,channel,name,info,type,discount,vouchers,begin_time,status,end_time)"
-            + "VALUES " +
-            "(#{id},#{channel},#{name},#{info},#{type},#{discount},#{vouchers},#{beginTime},#{status},#{endTime})")
-    void s(Activity activity);
+    @Select("select * from tb_activity where id =#{id};")
+    ActivityVo getById(Long id);
 
-    //分页
-    Page<Activity> pageQuery(PageQueryDTO pageQueryDTO);
-
-    //修改活动
-    void update(ActivityDTO activityDTO);
+    void setActivity(ActivtyAddDto dto);
 }

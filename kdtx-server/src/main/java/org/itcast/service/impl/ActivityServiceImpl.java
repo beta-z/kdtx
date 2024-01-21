@@ -1,58 +1,96 @@
 package org.itcast.service.impl;
 
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import org.itcast.dto.ActivityDTO;
-
-import org.itcast.dto.PageQueryDTO;
-import org.itcast.entity.Activity;
-import com.sky.result.PageResult;
+import com.sky.result.ActityGetByIdResult;
+import com.sky.result.ActityPageResult;
 import com.sky.result.Result;
+import org.itcast.dto.ActivityDto;
+import org.itcast.dto.ActivtyAddDto;
+import org.itcast.entity.TbActivity;
 import lombok.extern.slf4j.Slf4j;
 import org.itcast.mapper.ActivityMapper;
 import org.itcast.service.ActivityService;
+import org.itcast.vo.ActivitJia;
+import org.itcast.vo.ActivityList;
+import org.itcast.vo.ActivityVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Slf4j
 public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
-    private ActivityMapper activityMapper;
+    ActivityMapper activityMapper;
 
-    //新增活动
+    /**
+     * 新增
+     * @param dto
+     * @return
+     */
     @Override
-    public void save(ActivityDTO activityDTO) {
-        Activity activity = new Activity();
-        BeanUtils.copyProperties(activityDTO,activity);
-        activityMapper.s(activity);
+    public Object insertActivity(ActivtyAddDto dto) {
+        TbActivity activity = new TbActivity();
+        BeanUtils.copyProperties(dto, activity);
+        activityMapper.insertActivity(activity);
+        return Result.success();
     }
 
-    //根据id删除活动
+    /**
+     * 活动管理
+     * @param dto
+     * @return
+     */
     @Override
-    public void deleteById(Long id) {
+    public ActityPageResult selectListActivity(ActivityDto dto) {
+        PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
+
+        Page<ActivityVo> voList = activityMapper.selectListActivityList(dto.getCode(), dto.getChannel(), dto.getBeginCreateTime(), dto.getEndCreateTime(), dto.getBeginTime(), dto.getEndTime());
+
+        List<ActivitJia> list = new ArrayList<>();
+        return new ActityPageResult(voList.getTotal(), voList.getResult(), 200, "查询成功", list);
+    }
+
+    /**删除活动
+    @Override
+    */
+    public void delActivity(Long id) {
         activityMapper.deleteById(id);
     }
 
     @Override
-    public Result getById(Integer id) {
-        return null;
+    public ActityGetByIdResult getById(Long id) {
+        ActivityVo data = activityMapper.getById(id);
+        return new ActityGetByIdResult("操作成功",200,data);
     }
 
-    //分页
     @Override
-    public PageResult pageQuery(PageQueryDTO pageQueryDTO) {
-        PageHelper.startPage(pageQueryDTO.getPage(),pageQueryDTO.getPageSize());
-        Page<Activity> page = activityMapper.pageQuery(pageQueryDTO);
-        return new PageResult(page.getTotal(),page.getResult());
+    public Object setActivity(ActivtyAddDto dto) {
+        activityMapper.setActivity(dto);
+        return Result.success();
     }
 
-    //修改活动
     @Override
-    public void update(ActivityDTO activityDTO) {
-        activityMapper.update(activityDTO);
-
+    public Result getActivityList(String channel) {
+        LambdaQueryWrapper<TbActivity> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(TbActivity::getChannel, channel);
+        List<TbActivity> activities = activityMapper.selectList(wrapper);
+        List<ActivityList> list = new ArrayList<>();
+        Integer i = 0;
+        for (TbActivity activity : activities) {
+            ActivityList act = new ActivityList();
+            act.setId(i.toString());
+            act.setName(activity.getName());
+            i++;
+            list.add(act);
+        }
+        return Result.success(list);
     }
 }

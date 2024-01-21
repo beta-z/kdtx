@@ -1,5 +1,7 @@
 package org.itcast.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +13,10 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Activity implements Serializable {
+@TableName
+public class TbActivity implements Serializable {
 
+    @TableId
     private Long id;
 
     private String channel;
@@ -27,8 +31,8 @@ public class Activity implements Serializable {
 
     private Integer vouchers;
 
-    private Data beginTime;
+    private Long beginTime;
 
-    private Data endTime;
+    private Long endTime;
 
 }

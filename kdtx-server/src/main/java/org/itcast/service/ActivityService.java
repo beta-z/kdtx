@@ -1,24 +1,39 @@
 package org.itcast.service;
 
-import org.itcast.dto.ActivityDTO;
+import com.sky.result.ActityGetByIdResult;
+import com.sky.result.ActityPageResult;
+import com.sky.result.Result;
+import org.itcast.dto.ActivityDto;
+import org.itcast.dto.ActivtyAddDto;
 import org.itcast.dto.PageQueryDTO;
 import com.sky.result.PageResult;
-import com.sky.result.Result;
 
 public interface ActivityService {
 
-    //新增活动
-    void save (ActivityDTO activityDTO);
 
-    //删除活动
-    void deleteById(Long id);
+    /**
+     * 新增
+     * @param dto
+     * @return
+     */
+    Object insertActivity(ActivtyAddDto dto);
 
-    //根据id查询
-    Result getById(Integer id);
+    /**
+     * 查询活动管理列表
+     * @param dto
+     * @return
+     */
+    ActityPageResult selectListActivity(ActivityDto dto);
 
-    //分页
-    PageResult pageQuery(org.itcast.dto.PageQueryDTO pageQueryDTO);
+    /**
+     * 删除活动
+     * @param id
+     */
+    void delActivity(Long id);
 
-    //修改
-    void update(ActivityDTO activityDTO);
+    ActityGetByIdResult getById(Long id);
+
+    Object setActivity(ActivtyAddDto dto);
+
+    Result getActivityList(String channel);
 }
