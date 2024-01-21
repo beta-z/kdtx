@@ -14,14 +14,18 @@ spring:
   redis:
     host: localhost
     port: 6379
+    database: 7
     #password: 123456
     #database: 1
 
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.xdtx.entity
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*/*.xml
+  type-aliases-package: org.itcast.entity
+
 
 
 logging:
