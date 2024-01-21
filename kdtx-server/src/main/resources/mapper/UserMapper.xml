@@ -14,7 +14,7 @@
                              create_time,
                              remark,
                              password)
-                             values(#{deptId},#{password},#{userName},#{nickName},#{email},#{phonenumber},#{sex},#{status},#{createBy},#{createTime},#{remark});
+                             values(#{deptId},#{userName},#{nickName},#{email},#{phonenumber},#{sex},#{status},#{createBy},#{createTime},#{remark},#{password})
     </insert>
     <insert id="addUserRole">
         insert into sys_user_role(user_id, role_id)
@@ -33,14 +33,14 @@
     <update id="updateUser">
         update sys_user
         <set>
-        <if test="deptId !=null">dept_id = #{deptId}</if>
-        <if test="userName != null and userName != ''">user_name = #{userName}</if>
-        <if test="nickName != null and nickName != ''">nick_name = #{nickName}</if>
-        <if test="password != null and password != ''">password = #{password}</if>
-        <if test="phonenumber != null and phonenumber != ''">phonenumber = #{phonenumber}</if>
-        <if test="email != null and email != '' ">email = #{email}</if>
-        <if test="sex != null and sex != ''">sex = #{sex}</if>
-        <if test="status != null and status != ''">status = #{status}</if>
+        <if test="deptId !=null">dept_id = #{deptId},</if>
+        <if test="userName != null and userName != ''">user_name = #{userName},</if>
+        <if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
+        <if test="password != null and password != ''">password = #{password},</if>
+        <if test="phonenumber != null and phonenumber != ''">phonenumber = #{phonenumber},</if>
+        <if test="email != null and email != '' ">email = #{email},</if>
+        <if test="sex != null and sex != ''">sex = #{sex},</if>
+        <if test="status != null and status != ''">status = #{status},</if>
         <if test="remark != null and remark != '' ">remark = #{remark}</if>
         </set>
         where user_id = #{userId}
@@ -67,13 +67,13 @@
                update_by,
                update_time,
                remark from sys_user
-        where user_type ="00" <where>
-<if test="userName != null and userName != ''">user_name = #{userName} and </if>
-<if test="phonenumber != null and phonenumber != ''">phonenumber = #{phonenumber} and</if>
-<if test="status != null and status != ''">status = #{status} and</if>
-<if test="deptId != null">dept_id = #{deptId} and</if>
-<if test="begin != null and end !=null">create_time between #{begin} and #{end}</if>
-        </where>
+                   <where>
+<if test="userName != null and userName != ''">user_name like concat('%',#{userName},'%') </if>
+<if test="phonenumber != null and phonenumber != ''"> and phonenumber = #{phonenumber}</if>
+<if test="status != null and status != ''"> and status = #{status}</if>
+<if test="deptId != null"> and dept_id = #{deptId}</if>
+<if test="begin != null and end !=null"> and create_time between #{begin} and #{end}</if>
+                   </where>
 order by create_time desc
 
     </select>

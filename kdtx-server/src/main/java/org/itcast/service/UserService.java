@@ -1,12 +1,11 @@
 package org.itcast.service;
 
+import org.itcast.common.AddResult;
 import org.itcast.common.NewResult;
 import org.itcast.common.PageResult;
 import org.itcast.common.Result;
-import org.itcast.dto.UserDTO;
-import org.itcast.dto.UserPageDTO;
-import org.itcast.dto.UserUpdatePasswordDTO;
-import org.itcast.vo.UserListSelectVO;
+import org.itcast.dto.user.*;
+import org.itcast.entity.User;
 
 public interface UserService {
 
@@ -63,5 +62,35 @@ public interface UserService {
      * @param dto 用户id和新密码
      * @return
      */
-    Result updatePwd(UserUpdatePasswordDTO dto);
+    Result updatePwd(UserUpdatePwdDTO dto);
+
+    /**
+     * 修改用户状态
+     *
+     * @param dto
+     * @return
+     */
+    Result updateStatus(UserUpdateStatusDTO dto);
+
+    /**
+     * 修改密码（个人）
+     *
+     * @param dto
+     * @return
+     */
+    Result prUpdatePwd(PrUserUpdatePwdDTO dto);
+
+    /**
+     * 查询用户个人信息
+     *
+     * @return
+     */
+    Result selectProfile();
+
+    /**
+     * 新增用户所需
+     *
+     * @return
+     */
+    AddResult add();
 }

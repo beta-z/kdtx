@@ -1,16 +1,20 @@
-package org.itcast.entity;
+package org.itcast.vo;
+
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.itcast.entity.Role;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
+
+public class RoleVO{
 
     //更新人
     private String updateBy;
@@ -33,9 +37,9 @@ public class Role {
     //数据范围
     private String dataScope; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
     //菜单树选择项是否关联显示
-    private Boolean menuCheckStrictly;
+    private Integer menuCheckStrictly;
     //部门树选择项是否关联显示
-    private Boolean deptCheckStrictly;
+    private Integer deptCheckStrictly;
     //状态
     private String status; //0正常，1停用
     //删除标志
@@ -46,7 +50,6 @@ public class Role {
     private Boolean admin = true;
     //备注
     private String remark;
-
 
 
 }

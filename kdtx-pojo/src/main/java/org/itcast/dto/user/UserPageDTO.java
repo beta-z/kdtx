@@ -1,4 +1,4 @@
-package org.itcast.dto;
+package org.itcast.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
