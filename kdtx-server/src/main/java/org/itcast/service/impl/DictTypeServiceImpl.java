@@ -32,7 +32,7 @@ public class DictTypeServiceImpl implements DictTypeService {
             throw new ParamIllegalException("参数不合法");
         }
         PageHelper.startPage(dto.getPageNum(),dto.getPageSize());
-        Page<DictType> page = dictTypeMapper.list(dto.getDictType());
+        Page<DictType> page = dictTypeMapper.list(dto);
         return new DictTypeResult(page.getTotal(),page.getResult());
     }
 

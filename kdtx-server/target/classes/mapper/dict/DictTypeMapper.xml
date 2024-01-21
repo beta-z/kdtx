@@ -15,7 +15,7 @@
         where dict_id = #{dictId}
     </update>
 
-    <select id="list" resultType="org.itcast.entity.DictType">
+    <select id="list" resultType="org.itcast.dto.DictTypeListDTO">
         select dict_id,dict_name,dict_type,status,create_by,create_time from sys_dict_type
         <where>
             <if test="dictName != null and dictName != ''">dict_name like concat('%',#{dictName},'%')</if>

@@ -1,8 +1,10 @@
 package org.itcast.controller;
 
+import org.itcast.common.Result;
 import org.itcast.context.BaseContext;
 import org.itcast.dto.LoginDTO;
 import org.itcast.entity.Code;
+import org.itcast.vo.InfoResult;
 import org.itcast.vo.LoginVO;
 import org.itcast.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     @Autowired
     LoginService loginService;
+
     @PostMapping("/login")
     public LoginVO login(@RequestBody LoginDTO dto){
         return loginService.login(dto);
@@ -22,60 +25,10 @@ public class LoginController {
        return loginService.getCode();
     }
     @GetMapping("/getInfo")
-    public String getInfo(){
-        Long id = BaseContext.getCurrentId();
+    public InfoResult getInfo(){
 
-        return "{\n" +
-                "    \"msg\": \"操作成功\",\n" +
-                "    \"code\": 200,\n" +
-                "    \"permissions\": [\n" +
-                "        \"*:*:*\"\n" +
-                "    ],\n" +
-                "    \"roles\": [\n" +
-                "        \"admin\"\n" +
-                "    ],\n" +
-                "    \"user\": {\n" +
-                "        \"createBy\": \"admin\",\n" +
-                "        \"createTime\": \"2021-03-31 03:12:10\",\n" +
-                "        \"userId\": 1,\n" +
-                "        \"deptId\": 103,\n" +
-                "        \"userName\": \"demo\",\n" +
-                "        \"nickName\": \"admin\",\n" +
-                "        \"email\": \"admin@163.com\",\n" +
-                "        \"phonenumber\": \"12000008042\",\n" +
-                "        \"sex\": \"1\",\n" +
-                "        \"avatar\": \"\",\n" +
-                "        \"status\": \"0\",\n" +
-                "        \"delFlag\": \"0\",\n" +
-                "        \"loginIp\": \"127.0.0.1\",\n" +
-//                "        \"loginDate\": \"2021-03-31T03:12:10.000+0800\",\n" +
-                "        \"dept\": {\n" +
-                "            \"deptId\": 103,\n" +
-                "            \"parentId\": 101,\n" +
-                "            \"deptName\": \"研发部门\",\n" +
-                "            \"orderNum\": \"1\",\n" +
-                "            \"leader\": \"若依\",\n" +
-                "            \"status\": \"0\",\n" +
-                "            \"users\": [],\n" +
-                "            \"children\": []\n" +
-                "        },\n" +
-                "        \"roles\": [\n" +
-                "            {\n" +
-                "                \"roleId\": 1,\n" +
-                "                \"roleName\": \"超级管理员\",\n" +
-                "                \"roleKey\": \"admin\",\n" +
-                "                \"roleSort\": \"1\",\n" +
-                "                \"dataScope\": \"1\",\n" +
-                "                \"menuCheckStrictly\": false,\n" +
-                "                \"deptCheckStrictly\": false,\n" +
-                "                \"status\": \"0\",\n" +
-                "                \"flag\": false,\n" +
-                "                \"admin\": true\n" +
-                "            }\n" +
-                "        ],\n" +
-                "        \"admin\": true\n" +
-                "    }\n" +
-                "}";
+        return loginService.getInfo();
+
     }
 
 
@@ -91,29 +44,6 @@ public class LoginController {
                 "    \"msg\": \"操作成功\",\n" +
                 "    \"code\": 200,\n" +
                 "    \"data\": [\n" +
-                "        {\n" +
-                "            \"path\": \"/\",\n" +
-                "            \"hidden\": false,\n" +
-                "            \"component\": \"Layout\",\n" +
-                "            \"meta\": {\n" +
-                "                \"title\": \"首页\",\n" +
-                "                \"icon\": \"icon_menu_home\",\n" +
-                "                \"noCache\": false\n" +
-                "            },\n" +
-                "            \"children\": [\n" +
-                "                {\n" +
-                "                    \"name\": \"Index\",\n" +
-                "                    \"path\": \"index\",\n" +
-                "                    \"hidden\": false,\n" +
-                "                    \"component\": \"indexHome\",\n" +
-                "                    \"meta\": {\n" +
-                "                        \"title\": \"首页\",\n" +
-                "                        \"icon\": \"icon_menu_home\",\n" +
-                "                        \"noCache\": false\n" +
-                "                    }\n" +
-                "                }\n" +
-                "            ]\n" +
-                "        },\n" +
                 "        {\n" +
                 "            \"path\": \"/\",\n" +
                 "            \"hidden\": false,\n" +
@@ -240,8 +170,8 @@ public class LoginController {
                 "            },\n" +
                 "            \"children\": [\n" +
                 "                {\n" +
-                "                    \"name\": \"CountAnalysis\",\n" +
-                "                    \"path\": \"countAnalysis\",\n" +
+                "                    \"name\": \"/countAnalysis\",\n" +
+                "                    \"path\": \"/countAnalysis\",\n" +
                 "                    \"hidden\": false,\n" +
                 "                    \"component\": \"clues/countAnalysis/index\",\n" +
                 "                    \"meta\": {\n" +
@@ -263,8 +193,8 @@ public class LoginController {
                 "            },\n" +
                 "            \"children\": [\n" +
                 "                {\n" +
-                "                    \"name\": \"TransferManage\",\n" +
-                "                    \"path\": \"transferManage\",\n" +
+                "                    \"name\": \"/transferManage\",\n" +
+                "                    \"path\": \"/transferManage\",\n" +
                 "                    \"hidden\": false,\n" +
                 "                    \"component\": \"clues/transferManage/index\",\n" +
                 "                    \"meta\": {\n" +
@@ -288,6 +218,17 @@ public class LoginController {
                 "                \"noCache\": false\n" +
                 "            },\n" +
                 "            \"children\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"Notice\",\n" +
+                "                    \"path\": \"notice\",\n" +
+                "                    \"hidden\": false,\n" +
+                "                    \"component\": \"system/notice/index\",\n" +
+                "                    \"meta\": {\n" +
+                "                        \"title\": \"通知公告\",\n" +
+                "                        \"icon\": \"icon_menu_tzzx\",\n" +
+                "                        \"noCache\": false\n" +
+                "                    }\n" +
+                "                },\n" +
                 "                {\n" +
                 "                    \"name\": \"Permission\",\n" +
                 "                    \"path\": \"permission\",\n" +
@@ -442,7 +383,7 @@ public class LoginController {
                 "                {\n" +
                 "                    \"name\": \"SystemLog\",\n" +
                 "                    \"path\": \"systemLog\",\n" +
-                "                    \"hidden\": true,\n" +
+                "                    \"hidden\": false,\n" +
                 "                    \"component\": \"system/systemLog/index\",\n" +
                 "                    \"meta\": {\n" +
                 "                        \"title\": \"系统日志\",\n" +
