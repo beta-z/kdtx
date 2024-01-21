@@ -12,11 +12,7 @@ spring:
 
 
 mybatis:
-  #mapper配置文件
-  mapper-locations: classpath:mapper/*.xml,classpath:mapper/dict/*.xml
-  type-aliases-package: org.itcast.entity,org.itcast.vo
   configuration:
-    #开启驼峰命名
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 redis:

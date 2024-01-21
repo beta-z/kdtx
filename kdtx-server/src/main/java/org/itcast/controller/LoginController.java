@@ -194,7 +194,7 @@ public class LoginController {
                 "            },\n" +
                 "            \"children\": [\n" +
                 "                {\n" +
-                "                    \"name\": \"Activity\",\n" +
+                "                    \"name\": \"TbActivity\",\n" +
                 "                    \"path\": \"activity\",\n" +
                 "                    \"hidden\": false,\n" +
                 "                    \"component\": \"clues/activity/index\",\n" +

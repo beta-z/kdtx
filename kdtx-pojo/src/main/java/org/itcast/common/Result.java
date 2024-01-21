@@ -19,7 +19,7 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> success() {
         Result<T> result = new Result<T>();
-        result.code =200;
+        result.code = 200;
         return result;
     }
 
@@ -29,8 +29,6 @@ public class Result<T> implements Serializable {
         result.code = 200;
         return result;
     }
-
-
 
     public static <T> Result<T> error(String msg) {
         Result result = new Result();
