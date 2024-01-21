@@ -11,27 +11,27 @@ import java.io.Serializable;
  * @param <T>
  */
 @Data
-public class Result<T> implements Serializable {
+public class MyResult<T> implements Serializable {
 
     private Integer code; //编码：1成功，0和其它数字为失败
     private String msg; //错误信息
-    private T data; //数据
+    private T rows; //数据
 
-    public static <T> Result<T> success() {
-        Result<T> result = new Result<T>();
+    public static <T> MyResult<T> success() {
+        MyResult<T> result = new MyResult<T>();
         result.code = 200;
         return result;
     }
 
-    public static <T> Result<T> success(T object) {
-        Result<T> result = new Result<T>();
-        result.data = object;
+    public static <T> MyResult<T> success(T object) {
+        MyResult<T> result = new MyResult<T>();
+        result.rows = object;
         result.code = 200;
         return result;
     }
 
-    public static <T> Result<T> error(String msg) {
-        Result result = new Result();
+    public static <T> MyResult<T> error(String msg) {
+        MyResult result = new MyResult();
         result.msg = msg;
         result.code = 0;
         return result;
