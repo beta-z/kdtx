@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.itcast.mapper.ActivityMapper">
+
+    <insert id="insertActivity">
+        insert into tb_activity(name, code, channel, info, type, discount, vouchers, begin_time, end_time, create_time)values
+        (#{name},#{code},#{channel},#{info},#{type},#{discount},#{vouchers},#{beginTime},#{endTime},now())
+    </insert>
+
+
+
+    <update id="setActivity">
+        update   tb_activity
+        <set>
+
+            <if test="name != null ">name = #{name},</if>
+            <if test="channel != null ">channel = #{channel},</if>
+            <if test="info != null ">info = #{info},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="vouchers != null ">vouchers = #{vouchers},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="beginTime != null ">begin_time = #{beginTime},</if>
+            <if test="endTime != null ">end_time = #{endTime},</if>
+        </set>
+            where id = #{id}
+    </update>
+    <select id="selectListActivityList" resultType="org.itcast.vo.ActivityVo">
+        select *
+        from tb_activity
+        <where>
+            <if test="code != null and code != ''">
+                code like concat('%',#{code},'%')
+            </if>
+
+            <if test="channel != null ">
+                and channel= #{channel}
+            </if>
+            <if test="beginCreateTime != null and beginCreateTime != ''">
+                and date_format(create_time,'%y%m%d') &gt;= date_format(#{beginCreateTime},'%y%m%d')
+            </if>
+            <if test="endCreateTime != null and endCreateTime != ''">
+                and date_format(create_time,'%y%m%d') &lt;= date_format(#{endCreateTime},'%y%m%d')
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+
+</mapper>
